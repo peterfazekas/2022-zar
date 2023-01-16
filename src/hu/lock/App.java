@@ -25,5 +25,15 @@ public class App {
 
     private void run() {
         System.out.println("2. feladat");
+        System.out.print("Adja meg, mi nyitja a zárat! ");
+        String actualKey = console.read();
+        System.out.println("3. feladat");
+        System.out.println("A nyitó kódszámok sorai: " +
+                service.getEqualKeyIds(actualKey));
+        System.out.println("4. feladat");
+        System.out.println("Az első ismétlődést tartalmazó próbálkozás sorszáma: " +
+                service.getSameDigitKeyId());
+        System.out.println("5. feladat");
+        System.out.println(service.getGeneratedKey(actualKey));
     }
 }
