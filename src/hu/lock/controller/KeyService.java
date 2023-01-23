@@ -1,6 +1,7 @@
 package hu.lock.controller;
 
 import hu.lock.model.domain.Key;
+import hu.lock.model.service.LockUtil;
 import hu.lock.model.service.RandomKeyUtil;
 
 import java.util.List;
@@ -30,9 +31,9 @@ public class KeyService {
      */
     public String getSameDigitKeyId() {
         return keys.stream()
-                .filter(i -> i.hasSameDigit())
-                .map(i -> i.getId())
-                .map(i -> String.valueOf(i))
+                .filter(Key::hasSameDigit)
+                .map(Key::getId)
+                .map(String::valueOf)
                 .findFirst()
                 .orElse("nem volt ismétlődő számjegy");
     }
@@ -44,5 +45,14 @@ public class KeyService {
         int length = actualKey.length();
         String generatedKey = RandomKeyUtil.generateKey(length);
         return String.format("Egy %d hosszú kódszám: %s", length, generatedKey);
+    }
+
+    /**
+     * 7. feladat
+     */
+    public List<String> getOpenResults(String actualKey) {
+        return keys.stream()
+                .map(key -> key.openResult(actualKey))
+                .collect(Collectors.toList());
     }
 }

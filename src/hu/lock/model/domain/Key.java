@@ -1,5 +1,7 @@
 package hu.lock.model.domain;
 
+import hu.lock.model.service.LockUtil;
+
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,10 @@ public class Key {
 
     public boolean isEqual(String otherValue) {
         return value.equals(otherValue);
+    }
+
+    public String openResult(String otherValue) {
+        return value + " " + LockUtil.open(otherValue, value);
     }
 
     public boolean hasSameDigit() {
